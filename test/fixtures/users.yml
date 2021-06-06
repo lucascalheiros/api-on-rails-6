@@ -2,8 +2,8 @@
 
 one:
   email: test1@test.com
-  password_digest: 000
+  password_digest: <%= BCrypt::Password.create('000') %>
 
 two:
   email: test2@test.com
-  password_digest: 000
+  password_digest: <%= BCrypt::Password.create('000') %>

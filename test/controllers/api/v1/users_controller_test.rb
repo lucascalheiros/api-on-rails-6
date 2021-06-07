@@ -27,8 +27,18 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update user' do
-    patch api_v1_user_url(@user), params: { user: { email: @user.email, password: '123' } }, as: :json
+    patch(api_v1_user_url(@user),
+          params: { user: { email: @user.email, password: '123' } },
+          headers: { Authorization: JsonWebToken.encode(user_id: @user.id) },
+          as: :json)
     assert_response :success
+  end
+
+  test 'should forbid update user' do
+    patch(api_v1_user_url(@user),
+          params: { user: { email: @user.email, password: '123' } },
+          as: :json)
+    assert_response :forbidden
   end
 
   test 'should not update user, invalid email' do
@@ -38,8 +48,17 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should delete a user' do
     assert_difference('User.count', -1) do
-      delete api_v1_user_url(@user), as: :json
+      delete(api_v1_user_url(@user),
+             headers: { Authorization: JsonWebToken.encode(user_id: @user.id) },
+             as: :json)
     end
     assert_response :no_content
+  end
+
+  test 'should forbid delete a user' do
+    assert_difference('User.count', -1) do
+      delete(api_v1_user_url(@user), as: :json)
+    end
+    assert_response :forbidden
   end
 end

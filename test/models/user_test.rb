@@ -14,4 +14,9 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(email: 'testValid@test.com', password: '000')
     assert user.valid?
   end
+  test 'delete user should be cascaded to product' do
+    assert_difference('Product.count', -1) do
+      users(:one).destroy
+    end
+  end
 end

@@ -27,4 +27,20 @@ class ProductTest < ActiveSupport::TestCase
     products(:two).touch
     assert_equal [products(:three), products(:one), products(:two)], Product.recent.to_a
   end
+
+  test 'should search and find nothing' do
+    search_hash = { keyword: 'tssss', min_price: '100' }  
+    assert Product.search(search_hash).empty?
+  end
+
+  test 'should find a tv with price less than 10' do
+    search_hash = { keyword: 'tv', min_price: '10' }  
+    assert_equal 1, Product.search(search_hash).length
+  end
+
+
+  test 'should find by id' do
+    search_hash = { product_ids: products(:one).id }  
+    assert_equal [products(:one)], Product.search(search_hash)
+  end
 end

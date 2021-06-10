@@ -1,13 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  price: 9.99
+  title: Car
+  price: 1.99
   published: false
   user: one
 
 two:
-  title: MyString
+  title: TV
   price: 9.99
   published: false
+  user: two
+
+three:
+  title: TV LCD
+  price: 1224.0
+  published: true
   user: two

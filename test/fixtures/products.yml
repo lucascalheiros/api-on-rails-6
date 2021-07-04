@@ -2,18 +2,18 @@
 
 one:
   title: Car
-  price: 1.99
+  price: 1
   published: false
   user: one
 
 two:
   title: TV
-  price: 9.99
+  price: 9
   published: false
   user: two
 
 three:
   title: TV LCD
-  price: 1224.0
+  price: 122
   published: true
   user: two

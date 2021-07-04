@@ -8,6 +8,6 @@ class Order < ApplicationRecord
   validates :total, presence: true
 
   def set_total!
-    self.total = products.sum :price
+    self.total = products.map(&:price).sum
   end
 end
